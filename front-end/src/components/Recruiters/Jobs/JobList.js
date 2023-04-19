@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
 
 const JobList = () => {
   const auth = JSON.parse(localStorage.getItem("token"));
@@ -27,7 +28,7 @@ const JobList = () => {
       setLoading(true);
       const id = JSON.parse(localStorage.getItem("recruiter"))._id;
       let result = await fetch(
-        `http://localhost:5000/jobapi/get-job-recruiter/${id}`,
+        `${API_URL}/jobapi/get-job-recruiter/${id}`,
         {
           headers: {
             authorization: JSON.parse(localStorage.getItem("token")),
@@ -44,7 +45,7 @@ const JobList = () => {
 
   const deleteUser = async (value) => {
     const companyName = value;
-    fetch("http://localhost:5000/jobapi/delete-user", {
+    fetch(`${API_URL}/jobapi/delete-user`, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",

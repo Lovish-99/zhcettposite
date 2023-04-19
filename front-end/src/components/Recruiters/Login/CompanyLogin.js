@@ -10,6 +10,7 @@ import {
 import "../../Main/login.css";
 import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
 
 const CompanyLogin = () => {
   const [email, setEmail] = useState("");
@@ -20,7 +21,7 @@ const CompanyLogin = () => {
   const handlelogin = (e) => {
     setLoading(true);
     e.preventDefault();
-    fetch("http://localhost:5000/employapi/comp-login", {
+    fetch(`${API_URL}/employapi/comp-login`, {
       method: "POST",
       crossDomain: true,
       headers: {

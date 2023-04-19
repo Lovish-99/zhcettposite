@@ -11,6 +11,8 @@ import {
 } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
+
 const StudentDashboard = () => {
   const authorize = JSON.parse(localStorage.getItem("token"));
   const [email, setEmail] = useState("");
@@ -29,7 +31,7 @@ const StudentDashboard = () => {
     if (authorize) {
       setLoading(true);
       const idd = JSON.parse(localStorage.getItem("student"))._id;
-      await fetch(`http://localhost:5000/dataapi/add-data/${idd}`, {
+      await fetch(`${API_URL}/dataapi/add-data/${idd}`, {
         headers: {
           authorization: JSON.parse(localStorage.getItem("token")),
         },
@@ -47,7 +49,7 @@ const StudentDashboard = () => {
           }
         });
 
-      await fetch(`http://localhost:5000/applyjobapi/find-job-applied/${idd}`, {
+      await fetch(`${API_URL}/applyjobapi/find-job-applied/${idd}`, {
         headers: {
           authorization: JSON.parse(localStorage.getItem("token")),
         },

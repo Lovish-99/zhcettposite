@@ -4,6 +4,7 @@ import {
 } from "mdb-react-ui-kit";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {API_URL} from '../../../helper';
 
 const AddEvent = () => {
     const navigate = useNavigate();
@@ -34,7 +35,7 @@ const AddEvent = () => {
     };
 
     const uploadJob = async () => {
-        await fetch("http://localhost:5000/eventapi/upload-event", {
+        await fetch(`${API_URL}/eventapi/upload-event`, {
             method: "post",
             body: JSON.stringify({
                 title,

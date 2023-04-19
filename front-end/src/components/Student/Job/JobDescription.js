@@ -12,6 +12,8 @@ import {
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
+
 const JobDescription = () => {
   pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
   let { jobPostid } = useParams();
@@ -49,7 +51,7 @@ const JobDescription = () => {
   const getProfiles = async () => {
     setLoading(true);
     if (auth) {
-      let result = await fetch(`http://localhost:5000/jobapi/get-job/${jobPostid}`, {
+      let result = await fetch(`${API_URL}/jobapi/get-job/${jobPostid}`, {
         headers: {
           authorization: JSON.parse(localStorage.getItem("token")),
         },
@@ -58,7 +60,7 @@ const JobDescription = () => {
       setProfiles(result.data);
 
       let data = await fetch(
-        `http://localhost:5000/dataapi/add-data/${idd}`,
+        `${API_URL}/dataapi/add-data/${idd}`,
         {
           headers: {
             authorization: JSON.parse(localStorage.getItem("token")),
@@ -87,7 +89,7 @@ const JobDescription = () => {
     let companyName = profiles.companyName;
     let position = profiles.position;
     let jobtype = profiles.jobType;
-    let out = await fetch(`http://localhost:5000/applyjobapi/apply-to-job`, {
+    let out = await fetch(`${API_URL}/applyjobapi/apply-to-job`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -119,7 +121,7 @@ const JobDescription = () => {
       alert("something is wrong");
     }
 
-    await fetch("http://localhost:5000/mailapi/notify-jobapply-mail", {
+    await fetch(`${API_URL}/mailapi/notify-jobapply-mail`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

@@ -4,6 +4,7 @@ import {
   MDBRow, MDBCard, MDBCardBody, MDBContainer
 } from 'mdb-react-ui-kit';
 import Alert from 'react-bootstrap/Alert';
+import {API_URL} from '../../../helper';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
@@ -17,7 +18,7 @@ const ContactForm = () => {
       e.preventDefault();
       const message = "Name of the Company: " + name +  "\n\n" + "Recruiter Message: " + messag;
 
-      await fetch("http://localhost:5000/mailapi/send-mail", {
+      await fetch(`${API_URL}/mailapi/send-mail`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

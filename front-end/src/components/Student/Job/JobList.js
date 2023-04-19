@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
+
 const JobList = () => {
   const auth = JSON.parse(localStorage.getItem("token"));
   const navigate = useNavigate();
@@ -23,7 +25,7 @@ const JobList = () => {
   const getProfiles = async () => {
     setLoading(true);
     if (auth) {
-      let result = await fetch(`http://localhost:5000/jobapi/get-job`, {
+      let result = await fetch(`${API_URL}/jobapi/get-job`, {
         headers: {
           authorization: JSON.parse(localStorage.getItem("token")),
         },

@@ -12,6 +12,7 @@ import {
 } from "mdb-react-ui-kit";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
+import {API_URL} from '../../../helper';
 
 const ViewStudentDocument = () => {
   pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
@@ -30,7 +31,7 @@ const ViewStudentDocument = () => {
   }, []);
   const get_documents = async () => {
     setLoading(true);
-    await fetch(`http://localhost:5000/docapi/get-image/${idd}`, {
+    await fetch(`${API_URL}/docapi/get-image/${idd}`, {
       headers: {
         "Content-Type": "application/json",
         authorization: JSON.parse(localStorage.getItem("token")),

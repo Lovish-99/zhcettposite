@@ -12,6 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
 
 const EventDescription = () => {
   pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
@@ -49,7 +50,7 @@ const EventDescription = () => {
     setLoading(true);
     if (auth) {
       let result = await fetch(
-        `http://localhost:5000/eventapi/get-event/${id}`,
+        `${API_URL}/eventapi/get-event/${id}`,
         {
           headers: {
             authorization: JSON.parse(localStorage.getItem("token")),

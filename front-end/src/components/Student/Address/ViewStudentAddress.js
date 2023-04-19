@@ -10,6 +10,8 @@ import {
 } from "mdb-react-ui-kit";
 import { Link, useNavigate } from "react-router-dom";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
+
 const ViewStudentAddress = () => {
   const authorize = JSON.parse(localStorage.getItem("token"));
   const navigate = useNavigate();
@@ -27,7 +29,7 @@ const ViewStudentAddress = () => {
       setLoading(true);
       const idd = JSON.parse(localStorage.getItem("student"))._id;
       let result = await fetch(
-        `http://localhost:5000/dataapi/add-data/${idd}`,
+        `${API_URL}/dataapi/add-data/${idd}`,
         {
           headers: {
             authorization: JSON.parse(localStorage.getItem("token")),
@@ -50,7 +52,7 @@ const ViewStudentAddress = () => {
     if (authorize) {
       const idd = JSON.parse(localStorage.getItem("student"))._id;
       let result = await fetch(
-        `http://localhost:5000/dataapi/add-data/${idd}`,
+        `${API_URL}/dataapi/add-data/${idd}`,
         {
           headers: {
             authorization: JSON.parse(localStorage.getItem("token")),

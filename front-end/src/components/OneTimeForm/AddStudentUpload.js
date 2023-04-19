@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import base64 from "base64-js";
+import {API_URL} from '../../helper';
 
 const AddStudentUpload = () => {
   pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
@@ -67,7 +68,7 @@ const AddStudentUpload = () => {
     navigate("/onetimeform/reviewform");
   };
   function uploadImage() {
-    fetch("http://localhost:5000/docapi/upload-image", {
+    fetch(`${API_URL}/docapi/upload-image`, {
       method: "POST",
       crossDomain: true,
       headers: {

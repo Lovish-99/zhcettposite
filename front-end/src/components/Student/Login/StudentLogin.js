@@ -9,6 +9,7 @@ import {
 } from "mdb-react-ui-kit";
 import "../../Main/login.css";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
 
 const StudentLogin = () => {
   const [email, setEmail] = useState("");
@@ -20,7 +21,7 @@ const StudentLogin = () => {
   const handlelogin = (e) => {
     setLoading(true);
     e.preventDefault();
-    fetch("http://localhost:5000/userapi/login", {
+    fetch(`${API_URL}/userapi/login`, {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -48,7 +49,7 @@ const StudentLogin = () => {
   };
 
   const getStudentData = async () => {
-    fetch(`http://localhost:5000/dataapi/add-data/${userId}`, {
+    fetch(`${API_URL}/dataapi/add-data/${userId}`, {
       headers: {
         authorization: JSON.parse(localStorage.getItem("token")),
       },

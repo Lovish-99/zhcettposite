@@ -8,6 +8,7 @@ import {
 } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
 
 const RecruiterDash = () => {
   const authorize = JSON.parse(localStorage.getItem("token"));
@@ -15,7 +16,7 @@ const RecruiterDash = () => {
   const navigate = useNavigate();
   const [details, setDetails] = useState("");
   const [loading, setLoading] = useState(false);
-  const [recruiterId, setRecruiterId] = useState("");
+  let recruiterId = "";
 
   useEffect(() => {
     if (!authorize || !identity) {
@@ -23,7 +24,7 @@ const RecruiterDash = () => {
     } else {
       const revealIdentity = identity.role;
       if (revealIdentity === "recruiter") {
-        setRecruiterId(JSON.parse(localStorage.getItem("recruiter"))._id);
+        recruiterId = JSON.parse(localStorage.getItem("recruiter"))._id;
         getCompanyDetails();
       } else {
         navigate("/");
@@ -37,7 +38,7 @@ const RecruiterDash = () => {
     if (authorize) {
       setLoading(true);
       let result = await fetch(
-        `http://localhost:5000/employInfoapi/add-data/${recruiterId}`,
+        `${API_URL}/employInfoapi/add-data/${recruiterId}`,
         {
           headers: {
             authorization: JSON.parse(localStorage.getItem("token")),

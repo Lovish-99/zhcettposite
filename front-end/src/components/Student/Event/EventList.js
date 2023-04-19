@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
 
 const EventList = () => {
   const auth = JSON.parse(localStorage.getItem("token"));
@@ -24,7 +25,7 @@ const EventList = () => {
   const getProfiles = async () => {
     setLoading(true);
     if (auth) {
-      let result = await fetch(`http://localhost:5000/eventapi/get-event`, {
+      let result = await fetch(`${API_URL}/eventapi/get-event`, {
         headers: {
           authorization: JSON.parse(localStorage.getItem("token")),
         },

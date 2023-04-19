@@ -11,6 +11,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
 
 const Profile = () => {
   const auth = JSON.parse(localStorage.getItem("token"));
@@ -33,7 +34,7 @@ const Profile = () => {
       setMiddle(JSON.parse(localStorage.getItem("student")).middleName);
       setLast(JSON.parse(localStorage.getItem("student")).lastName);
       let result = await fetch(
-        `http://localhost:5000/dataapi/add-data/${idd}`,
+        `${API_URL}/dataapi/add-data/${idd}`,
         {
           headers: {
             authorization: JSON.parse(localStorage.getItem("token")),

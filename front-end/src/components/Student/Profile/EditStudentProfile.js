@@ -12,6 +12,8 @@ import { Link, useNavigate } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
+
 const Editstdprofile = () => {
   const [passwordType, setPasswordType] = useState("password");
   const [fatherName, setfatherName] = useState("");
@@ -49,7 +51,7 @@ const Editstdprofile = () => {
       setMiddle(JSON.parse(localStorage.getItem("student")).middleName);
       setLast(JSON.parse(localStorage.getItem("student")).lastName);
       let result = await fetch(
-        `http://localhost:5000/dataapi/add-data/${idd}`,
+        `${API_URL}/dataapi/add-data/${idd}`,
         {
           headers: {
             authorization: JSON.parse(localStorage.getItem("token")),
@@ -82,7 +84,7 @@ const Editstdprofile = () => {
 
   const update_profile = async () => {
     const idd = JSON.parse(localStorage.getItem("student"))._id;
-    await fetch(`http://localhost:5000/dataapi/update-data/${idd}`, {
+    await fetch(`${API_URL}/dataapi/update-data/${idd}`, {
       method: "put",
       body: JSON.stringify({
         stdprofile: {

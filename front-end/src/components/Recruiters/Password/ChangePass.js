@@ -6,6 +6,7 @@ import { MDBCard, MDBCardBody, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import Nabvar from "../../Main/navbar/Navbar";
 import Footer from '../../Main/footer/footer';
 import { useNavigate } from "react-router-dom";
+import {API_URL} from '../../../helper';
 
 const ChangePass = () => {
   const [token, setToken] = useState("");
@@ -30,7 +31,7 @@ const ChangePass = () => {
         return;
       }
 
-      const res = await fetch("http://localhost:5000/employapi/reset-password", {
+      const res = await fetch(`${API_URL}/employapi/reset-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

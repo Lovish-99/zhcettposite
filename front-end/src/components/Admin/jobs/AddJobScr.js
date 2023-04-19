@@ -4,6 +4,7 @@ import {
 } from "mdb-react-ui-kit";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {API_URL} from '../../../helper';
 
 const AddJob = () => {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const AddJob = () => {
   };
   const recruiterId = JSON.parse(localStorage.getItem("recruiter"))._id;
   const uploadJob = async () => {
-    await fetch("http://localhost:5000/jobapi/upload-job", {
+    await fetch(`${API_URL}/jobapi/upload-job`, {
       method: "post",
       body: JSON.stringify({
         companyName,

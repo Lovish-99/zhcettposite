@@ -12,6 +12,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import QRCode from "react-qr-code";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
+
 const MangStudent = () => {
   const auth = JSON.parse(localStorage.getItem("token"));
   const navigate = useNavigate();
@@ -27,7 +29,7 @@ const MangStudent = () => {
     if (auth) {
       setLoading(true);
       await fetch(
-        `http://localhost:5000/dataapi/get-student/${course}/${department}/${faculty}`,
+        `${API_URL}/dataapi/get-student/${course}/${department}/${faculty}`,
         {
           headers: {
             authorization: JSON.parse(localStorage.getItem("token")),
@@ -46,7 +48,7 @@ const MangStudent = () => {
   };
 
   const download = async () => {
-    const response = await fetch(`http://localhost:5000/dataapi/download-csv/${course}/${department}/${faculty}`, {
+    const response = await fetch(`${API_URL}/dataapi/download-csv/${course}/${department}/${faculty}`, {
       headers: {
         authorization: JSON.parse(localStorage.getItem("token")),
       },

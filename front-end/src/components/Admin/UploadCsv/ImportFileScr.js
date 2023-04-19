@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { MDBContainer, MDBBtn, MDBRow, MDBCol, MDBCard, MDBCardBody } from 'mdb-react-ui-kit';
 import './testing.css';
+import {API_URL} from '../../../helper';
 
 function ImportCsv() {
     const [file, setFile] = useState("");
@@ -14,7 +15,7 @@ function ImportCsv() {
         event.preventDefault();
         const formData = new FormData();
         formData.append('file', file);
-        axios.post(`http://localhost:5000/enroll/import-csv`, formData)
+        axios.post(`${API_URL}/enroll/import-csv`, formData)
             .then((response) => {
                 console.log(response.data);
                 alert("File Updated Successfully");

@@ -5,6 +5,7 @@ import {
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
 
 const ViewApplyJobScr = () => {
     let { id } = useParams();
@@ -21,7 +22,7 @@ const ViewApplyJobScr = () => {
     const getData = async () => {
         if (authorize) {
             setLoading(true);
-            await fetch(`http://localhost:5000/applyjobapi/find-job-bycomp/${id}`, {
+            await fetch(`${API_URL}/applyjobapi/find-job-bycomp/${id}`, {
                 headers: {
                     authorization: JSON.parse(localStorage.getItem("token")),
                 },
@@ -54,7 +55,7 @@ const ViewApplyJobScr = () => {
         let jobtype = data.item.jobType;
         let jobstatus = applicationStatus;
 
-        await fetch(`http://localhost:5000/applyjobapi/update-student-job-status/${jobId}/${studentId}`, {
+        await fetch(`${API_URL}/applyjobapi/update-student-job-status/${jobId}/${studentId}`, {
             method: "put",
             body: JSON.stringify({
                 jobId,
@@ -78,7 +79,7 @@ const ViewApplyJobScr = () => {
             },
         });
 
-        await fetch("http://localhost:5000/mailapi/notify-jobstatus-mail", {
+        await fetch(`${API_URL}/mailapi/notify-jobstatus-mail`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

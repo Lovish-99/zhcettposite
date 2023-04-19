@@ -7,6 +7,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
 
 const EventsDescribe = () => {
   pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
@@ -43,7 +44,7 @@ const EventsDescribe = () => {
   const getProfiles = async () => {
     if (auth) {
       setLoading(true);
-      let result = await fetch(`http://localhost:5000/eventapi/get-event/${id}`, {
+      let result = await fetch(`${API_URL}/eventapi/get-event/${id}`, {
         headers: {
           authorization: JSON.parse(localStorage.getItem("token")),
         },

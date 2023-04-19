@@ -10,6 +10,8 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { Country, State, City } from "country-state-city";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
+
 const EditStudentTempAddress = () => {
   const [flatNo, setflatNo] = useState("");
   const [area, setarea] = useState("");
@@ -32,7 +34,7 @@ const EditStudentTempAddress = () => {
       setLoading(true);
       const idd = JSON.parse(localStorage.getItem("student"))._id;
       let result = await fetch(
-        `http://localhost:5000/dataapi/add-data/${idd}`,
+        `${API_URL}/dataapi/add-data/${idd}`,
         {
           headers: {
             authorization: JSON.parse(localStorage.getItem("token")),
@@ -57,7 +59,7 @@ const EditStudentTempAddress = () => {
 
   const update_tempaddress = async () => {
     const idd = JSON.parse(localStorage.getItem("student"))._id;
-    await fetch(`http://localhost:5000/dataapi/update-data/${idd}`, {
+    await fetch(`${API_URL}/dataapi/update-data/${idd}`, {
       method: "put",
       body: JSON.stringify({
         stdtempadd: {

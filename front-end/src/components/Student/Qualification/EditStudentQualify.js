@@ -11,6 +11,8 @@ import {
 import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
+
 const EditStudentQualify = () => {
   const [qualifyLevel, setqualifyLevel] = useState("");
   const [qualifyName, setqualifyName] = useState("");
@@ -46,7 +48,7 @@ const EditStudentQualify = () => {
     if (authorize) {
       setLoading(true);
       const idd = JSON.parse(localStorage.getItem("student"))._id;
-      let resu = await fetch(`http://localhost:5000/dataapi/add-data/${idd}`, {
+      let resu = await fetch(`${API_URL}/dataapi/add-data/${idd}`, {
         headers: {
           authorization: JSON.parse(localStorage.getItem("token")),
         },
@@ -68,7 +70,7 @@ const EditStudentQualify = () => {
 
   const update_qualify = async () => {
     const idd = JSON.parse(localStorage.getItem("student"))._id;
-    await fetch(`http://localhost:5000/dataapi/update-data/${idd}`, {
+    await fetch(`${API_URL}/dataapi/update-data/${idd}`, {
       method: "put",
       body: JSON.stringify({
         stdeducat: {

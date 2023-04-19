@@ -14,6 +14,7 @@ import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import ReactLoading from "react-loading";
 import base64 from 'base64-js';
+import {API_URL} from '../../../helper';
 
 const EditStudentDocument = () => {
   pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
@@ -36,7 +37,7 @@ const EditStudentDocument = () => {
 
   const get_documents = async () => {
     setLoading(true);
-    await fetch(`http://localhost:5000/docapi/get-image/${idd}`, {
+    await fetch(`${API_URL}/docapi/get-image/${idd}`, {
       headers: {
         "Content-Type": "application/json",
         authorization: JSON.parse(localStorage.getItem("token")),
@@ -75,7 +76,7 @@ const EditStudentDocument = () => {
   }
   const update_documents = async () => {
     setLoading(true);
-    await fetch(`http://localhost:5000/docapi/update-image/${idd}`, {
+    await fetch(`${API_URL}/docapi/update-image/${idd}`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",

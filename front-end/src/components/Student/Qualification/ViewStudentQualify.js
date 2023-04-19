@@ -5,6 +5,8 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
+
 const ViewStudentQualify = () => {
     const authorize = JSON.parse(localStorage.getItem("token"));
     const navigate = useNavigate();
@@ -19,7 +21,7 @@ const ViewStudentQualify = () => {
         if (authorize) {
             setLoading(true);
             const idd = JSON.parse(localStorage.getItem("student"))._id;
-            let result = await fetch(`http://localhost:5000/dataapi/add-data/${idd}`, {
+            let result = await fetch(`${API_URL}/dataapi/add-data/${idd}`, {
                 headers: {
                     "authorization": JSON.parse(localStorage.getItem("token")),
                 },

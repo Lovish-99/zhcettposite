@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import { MDBCard, MDBCardBody, MDBRow, MDBCol } from 'mdb-react-ui-kit';
+import {API_URL} from '../../../helper';
 
 const ChangeStudentPass = () => {
   const [token, setToken] = useState("");
@@ -19,7 +20,7 @@ const ChangeStudentPass = () => {
         return;
       }
 
-      const res = await fetch("http://localhost:5000/userapi/reset-password", {
+      const res = await fetch(`${API_URL}/userapi/reset-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

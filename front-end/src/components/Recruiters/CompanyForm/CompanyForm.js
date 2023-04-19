@@ -12,6 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import {API_URL} from '../../../helper';
 
 const Editstdprofile = () => {
   const [hiringManagerBio, setHiringManagerBio] = useState("");
@@ -47,7 +48,7 @@ const Editstdprofile = () => {
 
   const upload_company_data = async () => {
     const recruiterId = JSON.parse(localStorage.getItem("recruiter"))._id;
-    await fetch(`http://localhost:5000/employInfoapi/add-data`, {
+    await fetch(`${API_URL}/employInfoapi/add-data`, {
       method: "post",
       body: JSON.stringify({
         recruiterId,
@@ -68,23 +69,6 @@ const Editstdprofile = () => {
     });
     navigate("/recruiter/dashboard");
   };
-
-  // const set_company_details = async () => {
-  //   const recruiterId = JSON.parse(localStorage.getItem("recruiter"))._id;
-  //   const profi = JSON.stringify({
-  //     recruiterId,
-  //     companyName,
-  //     about,
-  //     location,
-  //     department,
-  //     visionAndmission,
-  //     hiringManagerBio,
-  //     hiringManagerContact,
-  //     hiringManagerName,
-  //     hiringManagerPost,
-  //   });
-  //   localStorage.setItem("companyDetails", profi);
-  // };
 
   return (
     <MDBContainer>

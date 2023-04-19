@@ -13,6 +13,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
+
 const MangRecruiter = () => {
   const auth = JSON.parse(localStorage.getItem("token"));
   const navigate = useNavigate();
@@ -26,7 +28,7 @@ const MangRecruiter = () => {
   const getProfiles = async () => {
     if (auth) {
       setLoading(true);
-      await fetch(`http://localhost:5000/employapi/get-recruit/`, {
+      await fetch(`${API_URL}/employapi/get-recruit/`, {
         headers: {
           authorization: JSON.parse(localStorage.getItem("token")),
         },
@@ -45,7 +47,7 @@ const MangRecruiter = () => {
 
   const deleteUser = async (value) => {
     const email = value;
-    fetch("http://localhost:5000/employapi/delete-user", {
+    fetch(`${API_URL}/employapi/delete-user`, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",

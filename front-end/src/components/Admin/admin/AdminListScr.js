@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ReactPaginate from 'react-paginate';
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
 
 const MangAdmin = () => {
   const auth = JSON.parse(localStorage.getItem("token"));
@@ -20,7 +21,7 @@ const MangAdmin = () => {
   const getProfiles = async () => {
     if (auth) {
       setLoading(true);
-      let result = await fetch(`http://localhost:5000/employapi/get-admins/`, {
+      let result = await fetch(`${API_URL}/employapi/get-admins/`, {
         headers: {
           authorization: JSON.parse(localStorage.getItem("token")),
         },
@@ -39,7 +40,7 @@ const MangAdmin = () => {
     }
     else {
       const email = value;
-      fetch("http://localhost:5000/employapi/delete-user", {
+      fetch(`${API_URL}/employapi/delete-user`, {
         method: "delete",
         headers: {
           "Content-Type": "application/json",

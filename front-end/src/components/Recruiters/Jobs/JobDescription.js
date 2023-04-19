@@ -6,6 +6,7 @@ import {
 } from "mdb-react-ui-kit";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import {API_URL} from '../../../helper';
 
 const JobDescription = () => {
   pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
@@ -42,7 +43,7 @@ const JobDescription = () => {
 
   const getProfiles = async () => {
     if (auth) {
-      let result = await fetch(`http://localhost:5000/jobapi/get-job-recruiter/${id}/${recruiter}`, {
+      let result = await fetch(`${API_URL}/jobapi/get-job-recruiter/${id}/${recruiter}`, {
         headers: {
           authorization: JSON.parse(localStorage.getItem("token")),
         },

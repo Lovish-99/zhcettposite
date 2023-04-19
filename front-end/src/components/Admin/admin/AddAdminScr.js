@@ -3,6 +3,7 @@ import {
   MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBCardImage,
 } from "mdb-react-ui-kit";
 import { Link, useNavigate } from "react-router-dom";
+import {API_URL} from '../../../helper';
 
 const Addadmin = () => {
   const [username, setFirstName] = useState("");
@@ -11,7 +12,7 @@ const Addadmin = () => {
   const navigate = useNavigate();
 
   const collectData = (e) => {
-    fetch("http://localhost:5000/employapi/admin-register", {
+    fetch(`${API_URL}/employapi/admin-register`, {
       method: "POST",
       crossDomain: true,
       headers: {

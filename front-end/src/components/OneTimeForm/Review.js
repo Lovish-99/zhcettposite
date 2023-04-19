@@ -5,6 +5,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import {API_URL} from '../../helper';
 
 const Review = () => {
   const [nextButton, setnextbutton] = useState(true);
@@ -35,7 +36,7 @@ const Review = () => {
     };
     const resume = { resume: JSON.parse(localStorage.getItem("resume")) };
 
-    await fetch("http://localhost:5000/dataapi/add-data", {
+    await fetch(`${API_URL}/dataapi/add-data`, {
       method: "post",
       body: JSON.stringify({
         studentId,

@@ -13,6 +13,8 @@ import { Link, useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import QRCode from "react-qr-code";
 import ReactLoading from "react-loading";
+import {API_URL} from '../../../helper';
+
 const MangStudent = () => {
   const auth = JSON.parse(localStorage.getItem("token"));
   const navigate = useNavigate();
@@ -30,7 +32,7 @@ const MangStudent = () => {
   const getProfiles = async () => {
     if (auth) {
       setLoading(true);
-      await fetch(`http://localhost:5000/dataapi/get-student/`, {
+      await fetch(`${API_URL}/dataapi/get-student/`, {
         headers: {
           authorization: JSON.parse(localStorage.getItem("token")),
         },
@@ -47,7 +49,7 @@ const MangStudent = () => {
 
   const deleteUser = async (value) => {
     const email = value;
-    fetch("http://localhost:5000/dataapi/delete-user", {
+    fetch(`${API_URL}/dataapi/delete-user`, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",

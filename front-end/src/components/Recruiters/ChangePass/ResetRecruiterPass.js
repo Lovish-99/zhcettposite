@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import { useNavigate } from "react-router-dom";
 import { MDBCard, MDBCardBody, MDBRow, MDBCol } from 'mdb-react-ui-kit';
+import {API_URL} from '../../../helper';
 
 const ResetRecruiterPass = () => {
     const [nextButton, setnextbutton] = useState(true);
@@ -18,7 +19,7 @@ const ResetRecruiterPass = () => {
         try {
             e.preventDefault();
 
-            const res = await fetch("http://localhost:5000/employapi/change-password", {
+            const res = await fetch(`${API_URL}/employapi/change-password`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

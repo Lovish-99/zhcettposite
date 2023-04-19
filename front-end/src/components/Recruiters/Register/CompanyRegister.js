@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {
   MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBBtn, MDBCardImage,
 } from "mdb-react-ui-kit";
+import {API_URL} from '../../../helper';
 
 const CompanyRegister = () => {
   const [username, setFirstName] = useState("");
@@ -14,7 +15,7 @@ const CompanyRegister = () => {
 
   const collectData = (e) => {
     e.preventDefault();
-    fetch("http://localhost:5000/employapi/comp-register", {
+    fetch(`${API_URL}/employapi/comp-register`, {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -42,7 +43,7 @@ const CompanyRegister = () => {
   }
 
   const getOTP = () => {
-    fetch("http://localhost:5000/employapi/generate-token", {
+    fetch(`${API_URL}/employapi/generate-token`, {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -64,7 +65,7 @@ const CompanyRegister = () => {
   }
 
   const verifyMail = () => {
-    fetch("http://localhost:5000/employapi/verify-token", {
+    fetch(`${API_URL}/employapi/verify-token`, {
       method: "POST",
       crossDomain: true,
       headers: {

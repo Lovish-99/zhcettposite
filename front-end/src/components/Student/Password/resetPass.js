@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { MDBCard, MDBCardBody, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import { Link } from 'react-router-dom';
 import Footer from '../../Main/footer/footer';
+import {API_URL} from '../../../helper';
 
 const ResetPass = () => {
     const [nextButton, setnextbutton] = useState(true);
@@ -28,7 +29,7 @@ const ResetPass = () => {
         try {
             e.preventDefault();
 
-            const res = await fetch("http://localhost:5000/userapi/change-password", {
+            const res = await fetch(`${API_URL}/userapi/change-password`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

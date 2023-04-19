@@ -4,6 +4,7 @@ import Select from "react-select";
 import {
   MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBCardImage, MDBBtn,
 } from "mdb-react-ui-kit";
+import {API_URL} from '../../../helper';
 
 const StudentRegister = () => {
   var [enroll, setEnroll] = useState();
@@ -25,7 +26,7 @@ const StudentRegister = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const getEnroll = () => {
-    fetch("http://localhost:5000/userapi/enroll", {
+    fetch(`${API_URL}/userapi/enroll`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -55,7 +56,7 @@ const StudentRegister = () => {
   const collectData = () => {
     enroll= enroll.value
     console.log(enroll)
-    fetch("http://localhost:5000/userapi/register", {
+    fetch(`${API_URL}/userapi/register`, {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -86,7 +87,7 @@ const StudentRegister = () => {
   };
 
   const getOTP = () => {
-    fetch("http://localhost:5000/userapi/generate-token", {
+    fetch(`${API_URL}/userapi/generate-token`, {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -107,7 +108,7 @@ const StudentRegister = () => {
   };
   
   const verifyMail = () => {
-    fetch("http://localhost:5000/userapi/verify-token", {
+    fetch(`${API_URL}/userapi/verify-token`, {
       method: "POST",
       crossDomain: true,
       headers: {
