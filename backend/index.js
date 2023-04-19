@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors");
 dotenv.config({ path: "./config.env" });
 require("./db/config");
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 6000;
 const userRoute = require("./routes/studentuser");
 const employeeRoute = require("./routes/employeruser");
 const employerInfo = require('./routes/employerInfo');
