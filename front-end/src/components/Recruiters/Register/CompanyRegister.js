@@ -87,7 +87,7 @@ const CompanyRegister = () => {
   }
 
   return (
-    <MDBContainer  style={{minHeight:'100vh'}}>
+    <MDBContainer >
       <MDBCard className="text-black m-5" style={{ borderRadius: "25px" }}>
         <MDBCardBody>
           <MDBRow>

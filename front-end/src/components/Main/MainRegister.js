@@ -15,7 +15,7 @@ const MainRegister = () => {
   });
 
   return (
-    <MDBContainer style={{ minHeight: '90vh' }}>
+    <MDBContainer>
       <MDBCard className="text-black m-5" style={{ borderRadius: "0px" }}>
         <MDBCardBody>
           <MDBRow>

@@ -48,7 +48,6 @@ const CompanyLogin = () => {
     <>
       <MDBContainer
         className="my-5 gradient-form"
-        style={{ minHeight: "100vh" }}
       >
         <MDBCard className="text-black m-5" style={{ borderRadius: "25px" }}>
           <MDBCardBody>

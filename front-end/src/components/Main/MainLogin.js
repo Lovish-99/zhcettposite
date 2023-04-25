@@ -5,7 +5,7 @@ import "./login.css";
 
 const MainLogin = () => {
   return (
-    <div style={{minHeight:'100vh'}}> 
+    <div> 
     <MDBContainer>
       <MDBRow>
         <MDBCol md={6}>
