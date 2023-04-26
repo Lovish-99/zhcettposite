@@ -3,8 +3,9 @@ import { Navbar } from "react-bootstrap";
 const Footer = () => {
   return (
     <>
-      <Navbar style={{ padding: "0px",width: "100%"}} sticky="bottom">
-        <div className="text-center p-2" style={{ backgroundColor: "teal", width: "100%"}}>
+      <div style={{ height: "50px" }}></div>
+      <Navbar style={{ padding: "0px", width: "100%", marginTop: "10px" }} fixed="bottom">
+        <div className="text-center p-2" style={{ backgroundColor: "teal", width: "100%" }}>
           {/* <div className="bg-light text-center text-white" >
             <section>
               
@@ -30,11 +31,11 @@ const Footer = () => {
             </section>
           </div> */}
 
-          <h4 style={{color: "white"}}>© 2023 Copyright:&nbsp;&nbsp;&nbsp;&nbsp;
-              <a style={{ color: "white", textDecoration: "none" }} target="_blank" href="https://www.amu.ac.in/training-and-placement/general">
-                TRAINING AND PLACEMENT CELL
-              </a>
-            </h4>
+          <h4 style={{ color: "white" }}>© 2023 Copyright:&nbsp;&nbsp;&nbsp;&nbsp;
+            <a style={{ color: "white", textDecoration: "none" }} target="_blank" href="https://www.amu.ac.in/training-and-placement/general">
+              TRAINING AND PLACEMENT CELL
+            </a>
+          </h4>
         </div>
       </Navbar>
     </>
