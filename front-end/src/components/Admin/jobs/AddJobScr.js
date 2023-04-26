@@ -5,6 +5,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {API_URL} from '../../../helper';
+import base64 from 'base64-js';
 
 const AddJob = () => {
   const navigate = useNavigate();
@@ -32,11 +33,14 @@ const AddJob = () => {
   const covertToBase64 = (e) => {
     console.log(e);
     var reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
       console.log(reader.result);
-      setsupportiveDocs(reader.result);
+      const arrayBuffer = reader.result;
+      const uint8Array = new Uint8Array(arrayBuffer);
+      const base64String = base64.fromByteArray(uint8Array);
+      setsupportiveDocs(base64String);
     };
+    reader.readAsArrayBuffer(e.target.files[0]);
   };
   const recruiterId = JSON.parse(localStorage.getItem("recruiter"))._id;
   const uploadJob = async () => {
