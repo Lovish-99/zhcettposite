@@ -13,7 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import QRCode from "react-qr-code";
 import ReactLoading from "react-loading";
-import {API_URL} from '../../../helper';
+import { API_URL } from '../../../helper';
 
 const MangStudent = () => {
   const auth = JSON.parse(localStorage.getItem("token"));
@@ -21,7 +21,6 @@ const MangStudent = () => {
   const [profiles, setProfiles] = useState([]);
   const [department, setDepartment] = useState("");
   const [course, setCourse] = useState("");
-  const [cpi, setCpi] = useState("");
   const [faculty, setFaculty] = useState("");
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -49,7 +48,9 @@ const MangStudent = () => {
 
   const deleteUser = async (value) => {
     const email = value;
-    fetch(`${API_URL}/dataapi/delete-user`, {
+    console.log(email);
+    setLoading(true);
+    await fetch(`${API_URL}/dataapi/delete-user`, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
@@ -62,6 +63,7 @@ const MangStudent = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "ok") {
+          setLoading(false);
           alert("user delected succesfully!");
         }
       });
@@ -77,32 +79,33 @@ const MangStudent = () => {
               <form>
                 <MDBCard style={{ borderRadius: "0px" }}>
                   <MDBCardBody>
-                    <MDBRow style={{ padding: "20px" }}>
-                      <MDBCol md={11}>
-                        <MDBRow>
-                          <MDBCol md={2}>
-                            <img
-                              src={item.picture.picture[0]["dataImage"]}
-                              alt="pic"
-                              style={{
-                                borderRadius: "25px solid",
-                                height: "200px",
-                              }}
-                            />
-                          </MDBCol>
-                          <MDBCol md={8}>
-                            <h6>Name: {item.username}</h6>
-                            <h6>Branch: {item.stdprofile.department}</h6>
-                            <h6>Faculty No: {item.stdprofile.faculty}</h6>
-                            <h6>Enrollment No: {item.stdprofile.enrollNum}</h6>
-                            <h6>Department : {item.stdprofile.department}</h6>
-                            <h6>Course : {item.stdprofile.course}</h6>
-                            <h6>Contact: {item.stdprofile.mobNum}</h6>
-                            <h6>Email: {item.email}</h6>
-                            <h6>Skills: </h6>
-                            <h6>CPI: </h6>
-                          </MDBCol>
-                          <MDBCol md={2}>
+                    <MDBContainer>
+                      <MDBRow style={{ padding: "20px" }}>
+                        <MDBCol md={10}>
+                          <MDBRow>
+                            <MDBCol md={4}>
+                              <img
+                                src={`data:application/image;base64,${item.picture.picture[0]["dataImage"]}`}
+                                alt="pic"
+                                style={{
+                                  borderRadius: "25px solid",
+                                  height: "200px",
+                                  width: "150px",
+                                }}
+                              />
+                            </MDBCol>
+                            <MDBCol md={1} style={{ height: "15px", width: "20px"}}></MDBCol>
+                            <MDBCol md={6}>
+                              <h6><span style={{ fontSize: "bold" }}>Name: </span>{item.username}</h6>
+                              <h6>Branch: {item.stdprofile.department}</h6>
+                              <h6>Faculty No: {item.stdprofile.faculty}</h6>
+                              <h6>Enrollment No: {item.stdprofile.enrollNum}</h6>
+                              <h6>Department : {item.stdprofile.department}</h6>
+                              <h6>Course : {item.stdprofile.course}</h6>
+                              <h6>Contact: {item.stdprofile.mobNum}</h6>
+                              <h6>Email: {item.email}</h6>
+                            </MDBCol>
+                            {/* <MDBCol md={2}>
                             <QRCode
                               size={256}
                               style={{
@@ -113,18 +116,19 @@ const MangStudent = () => {
                               value="0"
                               viewBox={`0 0 256 256`}
                             />
-                          </MDBCol>
-                        </MDBRow>
-                      </MDBCol>
-                      <MDBCol>
-                        <MDBBtn
-                          type="submit"
-                          onClick={() => deleteUser(item.email)}
-                        >
-                          <i className="fa-solid fa-trash"></i>
-                        </MDBBtn>
-                      </MDBCol>
-                    </MDBRow>
+                          </MDBCol> */}
+                          </MDBRow>
+                        </MDBCol>
+                        <MDBCol>
+                          <MDBBtn
+                            type="submit"
+                            onClick={() => deleteUser(item.email)}
+                          >
+                            <i className="fa-solid fa-trash"></i>
+                          </MDBBtn>
+                        </MDBCol>
+                      </MDBRow>
+                    </MDBContainer>
                   </MDBCardBody>
                 </MDBCard>
                 <MDBRow style={{ height: "10px" }} />
@@ -263,16 +267,7 @@ const MangStudent = () => {
                       ></MDBInput>
                     </MDBCol>
 
-                    <MDBCol>
-                      <MDBInput
-                        id="fname"
-                        label="CPI:"
-                        type="text"
-                        pattern="[0-9]+"
-                        value={cpi}
-                        onChange={(e) => setCpi(e.target.value)}
-                      ></MDBInput>
-                    </MDBCol>
+                    
                     <MDBCol>
                       <Link
                         to={`${course}/${department}/${faculty}`}

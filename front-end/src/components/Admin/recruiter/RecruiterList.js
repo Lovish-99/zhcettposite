@@ -47,7 +47,8 @@ const MangRecruiter = () => {
 
   const deleteUser = async (value) => {
     const email = value;
-    fetch(`${API_URL}/employapi/delete-user`, {
+    setLoading(true);
+    await fetch(`${API_URL}/employapi/delete-user`, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
@@ -60,6 +61,7 @@ const MangRecruiter = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "ok") {
+          setLoading(false);
           alert("user delected succesfully!");
         }
       });
