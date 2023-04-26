@@ -547,7 +547,7 @@ const Review = () => {
                 </MDBBtn>
               </MDBCol>
               <MDBCol>
-                <Link to="/student/dashboard">
+                <Link to="/">
                   <MDBBtn type="submit" onClick={() => uploadData()} disabled={nextButton}>
                     Submit
                   </MDBBtn>
