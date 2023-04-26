@@ -80,7 +80,7 @@ const StudentDashboard = () => {
                 <MDBRow>
                   <MDBCol md={3}>
                     <img
-                      src={photo}
+                      src={`data:application/image;base64,${photo}`}
                       alt="img"
                       style={{ borderRadius: "25px solid", height: "200px" }}
                     />
