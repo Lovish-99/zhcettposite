@@ -69,7 +69,7 @@ const CompanyLogin = () => {
                       marginBottom: "20px",
                     }}
                   >
-                    Sign In FOR RECRUITERS AND ADMINS
+                    Sign In FOR RECRUITERS
                   </h3>
                   <div className="mb-3">
                     <label>Email address</label>
@@ -97,11 +97,6 @@ const CompanyLogin = () => {
 
                   <div className="mb-3">
                     <div className="custom-control custom-checkbox">
-                      <input
-                        type="checkbox"
-                        className="custom-control-input"
-                        id="customCheck1"
-                      />
                       <label
                         className="custom-control-label"
                         htmlFor="customCheck1"
@@ -127,12 +122,10 @@ const CompanyLogin = () => {
                 <div className="d-flex flex-column  justify-content-center gradient-custom-2 h-100 mb-4">
                   <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                     <h4 className="mb-4">
-                      Training and Placement Portal For Students
+                      Training and Placement Portal For Recruiters
                     </h4>
                     <p className="small mb-0">
-                      Students can login here and providing their personal
-                      details, academic qualifications and other details related
-                      to the placement.
+                    Access the power of our recruitment platform and find the perfect candidate for your team.
                     </p>
                   </div>
                 </div>
