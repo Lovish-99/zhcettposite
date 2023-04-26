@@ -26,7 +26,7 @@ const MainRegister = () => {
                 Placement Cell?
               </h1>
               <MDBRow style={{ height: "30px" }}></MDBRow>
-              <MDBCard style={{ borderRadius: "0px", width: "50%" }}>
+              <MDBCard style={{ borderRadius: "0px", width: "80%" }}>
                 <MDBCardBody>
                   <MDBRow>
                     <MDBCol md={1}>
@@ -42,7 +42,7 @@ const MainRegister = () => {
               </MDBCard>
 
               <MDBRow style={{ height: "30px" }}></MDBRow>
-              <MDBCard style={{ borderRadius: "0px", width: "50%" }}>
+              <MDBCard style={{ borderRadius: "0px", width: "80%" }}>
                 <MDBCardBody>
                   <MDBRow>
                     <MDBCol md={1}>

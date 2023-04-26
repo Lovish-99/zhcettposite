@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { MDBCard, MDBCardBody, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import { Link } from 'react-router-dom';
 import Footer from '../../Main/footer/footer';
-import {API_URL} from '../../../helper';
+import { API_URL } from '../../../helper';
 
 const ResetPass = () => {
     const [nextButton, setnextbutton] = useState(true);
@@ -77,12 +77,13 @@ const ResetPass = () => {
                                 </MDBRow>
                                 <MDBRow className='mt-4'></MDBRow>
                                 <MDBRow>
-                                    <MDBCol md={6}>
+                                    <MDBCol md={4}>
                                         <Link to="/login">
                                             <Button type="button">Login</Button>
                                         </Link>
                                     </MDBCol>
-                                    <MDBCol md={6}>
+                                    <MDBCol style={{ height: "10px" }}></MDBCol>
+                                    <MDBCol md={4}>
                                         <Button
                                             type="button"
                                             onClick={() => {
