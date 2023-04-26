@@ -3,7 +3,7 @@ import { Navbar } from "react-bootstrap";
 const Footer = () => {
   return (
     <>
-      <Navbar style={{ padding: "0px", marginTop: "10rem!important", bottom: "0", position: "fixed", width: "100%"}}>
+      <Navbar style={{ padding: "0px",width: "100%"}} sticky="bottom">
         <div className="text-center p-2" style={{ backgroundColor: "teal", width: "100%"}}>
           {/* <div className="bg-light text-center text-white" >
             <section>
