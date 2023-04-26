@@ -70,8 +70,9 @@ const MangRecruiter = () => {
     return (
       <>
         <form>
-          <MDBTable striped>
-            <MDBTableHead>
+        <div className="table-responsive">
+          <MDBTable striped >
+            <MDBTableHead >
               <tr>
                 <th style={{ fontWeight: "bold" }}>Company Name</th>
                 <th style={{ fontWeight: "bold" }}>Email</th>
@@ -98,6 +99,7 @@ const MangRecruiter = () => {
                 ))}
             </MDBTableBody>
           </MDBTable>
+          </div>
         </form>
       </>
     );

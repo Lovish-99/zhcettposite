@@ -103,6 +103,7 @@ const ViewApplyJobScr = () => {
                 <form>
                     <MDBContainer>
                         <MDBRow>
+                        <div className="table-responsive">
                             <MDBTable striped>
                                 <MDBTableHead>
                                     <tr>
@@ -141,6 +142,7 @@ const ViewApplyJobScr = () => {
                                         ))}
                                 </MDBTableBody>
                             </MDBTable>
+                            </div>
                         </MDBRow>
                     </MDBContainer>
                 </form>
