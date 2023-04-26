@@ -87,7 +87,7 @@ const CompanyRegister = () => {
   }
 
   return (
-    <MDBContainer  style={{minHeight:'100vh'}}>
+    <MDBContainer >
       <MDBCard className="text-black m-5" style={{ borderRadius: "25px" }}>
         <MDBCardBody>
           <MDBRow>
@@ -97,7 +97,7 @@ const CompanyRegister = () => {
               className="order-2 order-lg-1 d-flex flex-column align-items-center"
             >
               <form onSubmit={collectData}>
-                <h3>Sign Up FOR RECUITERS AND ADMINS</h3>
+                <h3>Sign Up FOR RECRUITERS </h3>
 
                 <div className="mb-3">
                   <label>Company Name</label>

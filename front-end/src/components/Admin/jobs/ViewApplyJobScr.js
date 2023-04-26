@@ -11,7 +11,7 @@ import {
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import ReactLoading from "react-loading";
-import {API_URL} from '../../../helper';
+import { API_URL } from '../../../helper';
 
 const ViewApplyJobScr = () => {
   let { id } = useParams();
@@ -86,17 +86,17 @@ const ViewApplyJobScr = () => {
     });
 
     await fetch(`${API_URL}/mailapi/notify-jobstatus-mail`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          studentEmail,
-          position,
-          companyName,
-          studentName,
-        })
-      });
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        studentEmail,
+        position,
+        companyName,
+        studentName,
+      })
+    });
 
     alert("job status updated succesfully");
   };
@@ -113,71 +113,75 @@ const ViewApplyJobScr = () => {
                 <MDBCardBody>
                   <MDBRow >
                     <MDBCol>
-                      <MDBTable striped>
-                        <tbody>
-                          <tr>
-                            <td>Comapany Name</td>
-                            <td>{item.companyName}</td>
-                          </tr>
-                          <tr>
-                            <td>Recruiter Name</td>
-                            <td>{item.recruiterName}</td>
-                          </tr>
-                          <tr>
-                            <td>Recruiter Email</td>
-                            <td>{item.email}</td>
-                          </tr>
-                          <tr>
-                            <td>Recruiter Number</td>
-                            <td>{item.mobile}</td>
-                          </tr>
-                          <tr>
-                            <td>Job Position </td>
-                            <td>{item.position}</td>
-                          </tr>
-                        </tbody>
-                      </MDBTable>
+                      <div className="table-responsive">
+                        <MDBTable striped>
+                          <tbody>
+                            <tr>
+                              <td>Comapany Name</td>
+                              <td>{item.companyName}</td>
+                            </tr>
+                            <tr>
+                              <td>Recruiter Name</td>
+                              <td>{item.recruiterName}</td>
+                            </tr>
+                            <tr>
+                              <td>Recruiter Email</td>
+                              <td>{item.email}</td>
+                            </tr>
+                            <tr>
+                              <td>Recruiter Number</td>
+                              <td>{item.mobile}</td>
+                            </tr>
+                            <tr>
+                              <td>Job Position </td>
+                              <td>{item.position}</td>
+                            </tr>
+                          </tbody>
+                        </MDBTable>
+                      </div>
                     </MDBCol>
                     <MDBCol>
-                      <MDBTable striped>
-                        <tbody>
-                          <tr>
-                            <td>Student Name</td>
-                            <td>{item.studentName}</td>
-                          </tr>
-                          <tr>
-                            <td>Student Email</td>
-                            <td>{item.studentEmail}</td>
-                          </tr>
-                          <tr>
-                            <td>Student Branch</td>
-                            <td>{item.studentBranch}</td>
-                          </tr>
-                          <tr>
-                            <td>Job Status</td>
-                            <td>
-                              <select
-                                className="form-control"
-                                value={applicationStatus}
-                                onChange={(e) =>
-                                  setApplicationStatus(e.target.value)
-                                }
-                                required
-                              >
-                                <option>{item.jobstatus}</option>
-                                <option>selected</option>
-                                <option>not selected</option>
-                              </select>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Update Job Status</td>
-                            <td>
-                              <MDBBtn type='button' onClick={() => update_status({ item })}> Save </MDBBtn>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </MDBTable>
+                      <div className="table-responsive">
+                        <MDBTable striped>
+                          <tbody>
+                            <tr>
+                              <td>Student Name</td>
+                              <td>{item.studentName}</td>
+                            </tr>
+                            <tr>
+                              <td>Student Email</td>
+                              <td>{item.studentEmail}</td>
+                            </tr>
+                            <tr>
+                              <td>Student Branch</td>
+                              <td>{item.studentBranch}</td>
+                            </tr>
+                            <tr>
+                              <td>Job Status</td>
+                              <td>
+                                <select
+                                  className="form-control"
+                                  value={applicationStatus}
+                                  onChange={(e) =>
+                                    setApplicationStatus(e.target.value)
+                                  }
+                                  required
+                                >
+                                  <option>{item.jobstatus}</option>
+                                  <option>selected</option>
+                                  <option>not selected</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Update Job Status</td>
+                              <td>
+                                <MDBBtn type='button' onClick={() => update_status({ item })}> Save </MDBBtn>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </MDBTable>
+                      </div>
                     </MDBCol>
                   </MDBRow>
                 </MDBCardBody>

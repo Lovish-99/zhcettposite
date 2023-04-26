@@ -41,7 +41,8 @@ const ViewJobs = () => {
 
   const deleteUser = async (value) => {
     const companyName = value;
-    fetch(`${API_URL}/jobapi/delete-user`, {
+    setLoading(true);
+    await fetch(`${API_URL}/jobapi/delete-user`, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
@@ -54,6 +55,7 @@ const ViewJobs = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "ok") {
+          setLoading(false);
           alert("job deleted succesfully!");
         }
       });

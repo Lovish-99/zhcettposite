@@ -47,7 +47,8 @@ const MangRecruiter = () => {
 
   const deleteUser = async (value) => {
     const email = value;
-    fetch(`${API_URL}/employapi/delete-user`, {
+    setLoading(true);
+    await fetch(`${API_URL}/employapi/delete-user`, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
@@ -60,6 +61,7 @@ const MangRecruiter = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "ok") {
+          setLoading(false);
           alert("user delected succesfully!");
         }
       });
@@ -70,8 +72,9 @@ const MangRecruiter = () => {
     return (
       <>
         <form>
-          <MDBTable striped>
-            <MDBTableHead>
+        <div className="table-responsive">
+          <MDBTable striped >
+            <MDBTableHead >
               <tr>
                 <th style={{ fontWeight: "bold" }}>Company Name</th>
                 <th style={{ fontWeight: "bold" }}>Email</th>
@@ -98,6 +101,7 @@ const MangRecruiter = () => {
                 ))}
             </MDBTableBody>
           </MDBTable>
+          </div>
         </form>
       </>
     );

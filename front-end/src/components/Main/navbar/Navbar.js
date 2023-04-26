@@ -1,9 +1,9 @@
 import React from "react";
-import "./Navbar.css";
-import { Container } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Nav, Navbar } from "react-bootstrap";
+import { MDBContainer } from "mdb-react-ui-kit";
 
-const Navbar = () => {
+const Nabar = () => {
   const auth = JSON.parse(localStorage.getItem("student"));
   const authh = JSON.parse(localStorage.getItem("recruiter"));
   const navigate = useNavigate;
@@ -14,95 +14,103 @@ const Navbar = () => {
   };
 
   return (
-    <div>
+    <>
       {auth || authh ? (
-        <nav className="navbar">
-          <Container>
-            <div className="logo">
-              Training & Placement Cell
-              <p>ZHCET AMU</p>
-            </div>
-            <ul className="nav-links">
-              <input type="checkbox" id="checkbox_toggle" />
-              <label htmlFor="checkbox_toggle" className="hamburger">
-                &#9776;
-              </label>
-              <div className="menu">
-                <li>
-                  <Link to="/" style={{ textDecoration: "none" }}>
-                    Home
-                  </Link>
-                </li>
-                {auth ? (
-                  <li>
-                    <Link
-                      to="/student/dashboard"
-                      style={{ textDecoration: "none" }}
+        <>
+          <Navbar expand="lg" style={{ backgroundColor: "teal" }}>
+            <MDBContainer
+              style={{ justifyContent: "left", paddingLeft: "60px" }}
+            >
+              <img src="/AMULOGO2.png" alt="img" style={{ height: "60px" }} />
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <h2 style={{ color: "white" }}>TPO ZHCET</h2>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <Navbar.Toggle aria-controls="basic-navbar-nav">
+                <h1>
+                  <i className="fa-sharp fa-solid fa-bars" />
+                </h1>
+              </Navbar.Toggle>
+            </MDBContainer>
+            <Navbar.Collapse id="basic-navbar-nav">
+              <MDBContainer>
+                <Nav className="mr-auto text-center">
+                  <Nav.Link href="/" style={{ color: "white" }}>
+                    &nbsp;&nbsp;Home
+                  </Nav.Link>
+                  {auth ? (
+                    <Nav.Link
+                      href="/student/dashboard"
+                      style={{ color: "white" }}
                     >
-                      <i className="fa-solid fa-user"></i> {auth.firstName}
-                    </Link>
-                  </li>
-                ) : null}
-                {authh ? (
-                  authh.role === "recruiter" ? (
-                    <li>
-                      <Link to="/recruiter/dashboard" style={{ textDecoration: "none" }}>
-                        <i className="fa-solid fa-user"></i> {authh.username}
-                      </Link>
-                    </li>
-                  ) : (
-                    <li>
-                      <Link to="/admin/manageadmin" style={{ textDecoration: "none" }}>
-                        <i className="fa-solid fa-user"></i> {authh.username}
-                      </Link>
-                    </li>
-                  )
-                ) : null}
-                <li>
-                  <Link
-                    onClick={() => logout()}
-                    style={{ textDecoration: "none" }}
-                    to="/register"
-                  >
-                    Logout
-                  </Link>
-                </li>
-              </div>
-            </ul>
-          </Container>
-        </nav>
-      ) : (
-        <nav className="navbar">
-          <Container>
-            <div className="logo">Training & Placement Cell</div>
-            <ul className="nav-links">
-              <input type="checkbox" id="checkbox_toggle" />
-              <label htmlFor="checkbox_toggle" className="hamburger">
-                &#9776;
-              </label>
-              <div className="menu">
-                <li>
-                  <Link to="/" style={{ textDecoration: "none" }}>
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/register" style={{ textDecoration: "none" }}>
-                    Register
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/login" style={{ textDecoration: "none" }}>
-                    Login
-                  </Link>
-                </li>
-              </div>
-            </ul>
-          </Container>
-        </nav>
-      )}
-    </div>
-  );
-}
+                      {auth.firstName}
+                    </Nav.Link>
+                  ) : null}
+                  {authh ? (
+                    authh.role === "recruiter" ? (
+                      <Nav.Link
+                        href="/recruiter/dashboard"
+                        style={{ color: "white" }}
+                      >
+                        {authh.username}
+                      </Nav.Link>
+                    ) : (
+                      <Nav.Link
+                        href="/admin/manageadmin"
+                        style={{ color: "white" }}
+                      >
+                        {authh.username}
+                      </Nav.Link>
+                    )
+                  ) : null}
 
-export default Navbar;
+                  <Nav.Link
+                    href="/register"
+                    style={{ color: "white", textDecoration: "none" }}
+                    onClick={() => logout()}
+                  >
+                    &nbsp;&nbsp;Logout
+                  </Nav.Link>
+                </Nav>
+              </MDBContainer>
+            </Navbar.Collapse>
+          </Navbar>
+        </>
+      ) : (
+        <>
+          <Navbar expand="lg" style={{ backgroundColor: "teal" }}>
+            <MDBContainer
+              style={{ justifyContent: "left", paddingLeft: "60px" }}
+            >
+              <img src="./AMULOGO2.png" alt="img" style={{ height: "60px" }} />
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <h2 style={{ color: "white" }}>TPO ZHCET</h2>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <Navbar.Toggle aria-controls="basic-navbar-nav">
+                <h1>
+                  <i className="fa-sharp fa-solid fa-bars" />
+                </h1>
+              </Navbar.Toggle>
+            </MDBContainer>
+            <Navbar.Collapse id="basic-navbar-nav">
+              <MDBContainer>
+                <Nav className="mr-auto text-center">
+                  <Nav.Link href="/" style={{ color: "white" }}>
+                    &nbsp;&nbsp;Home
+                  </Nav.Link>
+                  <Nav.Link href="/register" style={{ color: "white" }}>
+                    &nbsp;&nbsp;Register
+                  </Nav.Link>
+                  <Nav.Link href="/login" style={{ color: "white" }}>
+                    &nbsp;&nbsp;Login
+                  </Nav.Link>
+                </Nav>
+              </MDBContainer>
+            </Navbar.Collapse>
+          </Navbar>
+        </>
+      )}
+    </>
+  );
+};
+
+export default Nabar;

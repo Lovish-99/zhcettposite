@@ -72,7 +72,6 @@ const StudentLogin = () => {
     <>
       <MDBContainer
         className="my-5 gradient-form"
-        style={{ minHeight: "100vh" }}
       >
         <MDBCard className="text-black m-5" style={{ borderRadius: "25px" }}>
           <MDBCardBody>
@@ -125,11 +124,6 @@ const StudentLogin = () => {
 
                   <div className="mb-3">
                     <div className="custom-control custom-checkbox">
-                      <input
-                        type="checkbox"
-                        className="custom-control-input"
-                        id="customCheck1"
-                      />
                       <label
                         className="custom-control-label"
                         htmlFor="customCheck1"

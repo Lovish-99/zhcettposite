@@ -6,6 +6,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
+import base64 from 'base64-js';
 
 function AddStudentPicture() {
   pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
@@ -14,9 +15,11 @@ function AddStudentPicture() {
   const navigate = useNavigate();
   function covertToBase64(e) {
     var reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
       var Name = `${e.target.files[0].name}`;
+      const arrayBuffer = reader.result;
+      const uint8Array = new Uint8Array(arrayBuffer);
+      const base64String = base64.fromByteArray(uint8Array);
       var neww = Images.find((person) => person.fileType === e.target.id);
       if (neww) {
         const Index = Images.findIndex(
@@ -24,16 +27,17 @@ function AddStudentPicture() {
         );
         console.log(Index);
         Images[Index].fileName = Name;
-        Images[Index].dataImage = reader.result;
+        Images[Index].dataImage = base64String;
       } else {
         Images = Images.filter((person) => person.fileType !== e.target.id);
         Images.push({
           fileType: e.target.id,
           fileName: Name,
-          dataImage: reader.result,
+          dataImage: base64String,
         });
       }
     };
+    reader.readAsArrayBuffer(e.target.files[0]);
     reader.onerror = (error) => {
       console.log("Error: ", error);
     };

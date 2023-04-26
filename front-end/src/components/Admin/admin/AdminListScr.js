@@ -69,6 +69,7 @@ const MangAdmin = () => {
               <Link to="/admin/addadmin"><MDBBtn>ADD ADMIN</MDBBtn></Link>
             </MDBRow>
             <MDBRow>
+            <div className="table-responsive">
               <MDBTable striped>
                 <MDBTableHead>
                   <tr>
@@ -92,6 +93,7 @@ const MangAdmin = () => {
                     ))}
                 </MDBTableBody>
               </MDBTable>
+              </div>
             </MDBRow>
           </MDBContainer>
         </form>

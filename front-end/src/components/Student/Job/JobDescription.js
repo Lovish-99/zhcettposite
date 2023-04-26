@@ -12,7 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
-import {API_URL} from '../../../helper';
+import { API_URL } from "../../../helper";
 
 const JobDescription = () => {
   pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
@@ -28,26 +28,6 @@ const JobDescription = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1); //setting 1 to show fisrt page
-
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-    setPageNumber(1);
-  }
-
-  function changePage(offset) {
-    setPageNumber((prevPageNumber) => prevPageNumber + offset);
-  }
-
-  function previousPage() {
-    changePage(-1);
-  }
-
-  function nextPage() {
-    changePage(1);
-  }
-
   const getProfiles = async () => {
     setLoading(true);
     if (auth) {
@@ -59,14 +39,11 @@ const JobDescription = () => {
       result = await result.json();
       setProfiles(result.data);
 
-      let data = await fetch(
-        `${API_URL}/dataapi/add-data/${idd}`,
-        {
-          headers: {
-            authorization: JSON.parse(localStorage.getItem("token")),
-          },
-        }
-      );
+      let data = await fetch(`${API_URL}/dataapi/add-data/${idd}`, {
+        headers: {
+          authorization: JSON.parse(localStorage.getItem("token")),
+        },
+      });
       data = await data.json();
       setStudentData(data.data.data);
       setLoading(false);
@@ -122,18 +99,48 @@ const JobDescription = () => {
     }
 
     await fetch(`${API_URL}/mailapi/notify-jobapply-mail`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          studentEmail,
-          position,
-          companyName,
-          studentName,
-        })
-      });
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        studentEmail,
+        position,
+        companyName,
+        studentName,
+      }),
+    });
   };
+
+  function openBase64NewTab(base64Pdf) {
+    var blob = base64toBlob(base64Pdf);
+    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+      window.navigator.msSaveOrOpenBlob(blob, "pdfBase64.pdf");
+    } else {
+      const blobUrl = URL.createObjectURL(blob);
+      window.open(blobUrl);
+    }
+  }
+
+  function base64toBlob(base64Data) {
+    const sliceSize = 1024;
+    const byteCharacters = atob(base64Data);
+    const bytesLength = byteCharacters.length;
+    const slicesCount = Math.ceil(bytesLength / sliceSize);
+    const byteArrays = new Array(slicesCount);
+
+    for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+      const begin = sliceIndex * sliceSize;
+      const end = Math.min(begin + sliceSize, bytesLength);
+
+      const bytes = new Array(end - begin);
+      for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
+        bytes[i] = byteCharacters[offset].charCodeAt(0);
+      }
+      byteArrays[sliceIndex] = new Uint8Array(bytes);
+    }
+    return new Blob(byteArrays, { type: "application/pdf" });
+  }
 
   return (
     <>
@@ -169,37 +176,13 @@ const JobDescription = () => {
                 <hr />
                 <MDBRow style={{ height: "10px" }} />
                 <MDBRow className="text-center">
-                  <Document
-                    file={profiles.supportiveDocs}
-                    options={{ workerSrc: "/pdf.worker.js" }}
-                    onLoadSuccess={onDocumentLoadSuccess}
+                  <MDBCol>
+                  <MDBBtn
+                    type="button"
+                    onClick={() => openBase64NewTab(profiles.supportiveDocs)}
                   >
-                    <Page pageNumber={pageNumber} />
-                  </Document>
-                </MDBRow>
-                <MDBRow>
-                  <MDBCol>
-                    Page {pageNumber || (numPages ? 1 : "--")} of{" "}
-                    {numPages || "--"}
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow>
-                  <MDBCol>
-                    <MDBBtn
-                      type="button"
-                      disabled={pageNumber <= 1}
-                      onClick={previousPage}
-                    >
-                      Previous
-                    </MDBBtn>
-
-                    <MDBBtn
-                      type="button"
-                      disabled={pageNumber >= numPages}
-                      onClick={nextPage}
-                    >
-                      Next
-                    </MDBBtn>
+                    VIEW DOCUMENT
+                  </MDBBtn>
                   </MDBCol>
                 </MDBRow>
                 <MDBRow style={{ height: "10px" }} />

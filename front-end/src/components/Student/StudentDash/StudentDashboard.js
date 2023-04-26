@@ -80,7 +80,7 @@ const StudentDashboard = () => {
                 <MDBRow>
                   <MDBCol md={3}>
                     <img
-                      src={photo}
+                      src={`data:application/image;base64,${photo}`}
                       alt="img"
                       style={{ borderRadius: "25px solid", height: "200px" }}
                     />
@@ -115,13 +115,14 @@ const StudentDashboard = () => {
             <MDBCard className="text-black m-5">
               <MDBCardBody>
                 {/* 1st row */}
+                <div className="table-responsive">
                 <MDBTable striped>
                   <MDBTableHead>
                     <tr>
                       <th>Company Name</th>
                       <th>Postition</th>
                       <th>Job Type</th>
-                      <th>Apply By</th>
+                      {/* <th>Apply By</th> */}
                       <th>Application status</th>
                     </tr>
                   </MDBTableHead>
@@ -131,12 +132,13 @@ const StudentDashboard = () => {
                         <td>{item.companyName}</td>
                         <td>{item.position}</td>
                         <td>{item.jobtype}</td>
-                        <td>-</td>
+                        {/* <td>-</td> */}
                         <td>{item.jobstatus}</td>
                       </tr>
                     ))}
                   </MDBTableBody>
                 </MDBTable>
+                </div>
               </MDBCardBody>
             </MDBCard>
           </MDBContainer>
