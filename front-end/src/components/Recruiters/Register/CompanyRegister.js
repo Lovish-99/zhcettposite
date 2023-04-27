@@ -4,6 +4,7 @@ import {
   MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBBtn, MDBCardImage,
 } from "mdb-react-ui-kit";
 import {API_URL} from '../../../helper';
+import ReactLoading from "react-loading";
 
 const CompanyRegister = () => {
   const [username, setFirstName] = useState("");
@@ -12,8 +13,10 @@ const CompanyRegister = () => {
   const [token, setToken] = useState("");
   const [show, setShow] = useState(true);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const collectData = (e) => {
+    setLoading(true);
     e.preventDefault();
     fetch(`${API_URL}/employapi/comp-register`, {
       method: "POST",
@@ -32,6 +35,7 @@ const CompanyRegister = () => {
         console.log(data, "userRegister");
         if (data.status === "ok") {
           alert("Registration Successful");
+          setLoading(false);
           console.log(data.data.company);
           localStorage.setItem("recruiter", JSON.stringify(data.data.company));
           localStorage.setItem("token", JSON.stringify(data.data.token));
@@ -91,6 +95,14 @@ const CompanyRegister = () => {
       <MDBCard className="text-black m-5" style={{ borderRadius: "25px" }}>
         <MDBCardBody>
           <MDBRow>
+          {loading ? (
+                <ReactLoading
+                  type="spin"
+                  color="#0000FF"
+                  height={100}
+                  width={50}
+                />
+              ) : null}
             <MDBCol
               md="10"
               lg="6"
