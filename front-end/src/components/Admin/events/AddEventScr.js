@@ -35,7 +35,6 @@ const AddEvent = () => {
   const covertToBase64 = (e) => {
     console.log(e);
     var reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
       console.log(reader.result);
       const arrayBuffer = reader.result;
@@ -43,6 +42,8 @@ const AddEvent = () => {
       const base64String = base64.fromByteArray(uint8Array);
       setsupportiveDocs(base64String);
     };
+    reader.readAsArrayBuffer(e.target.files[0]);
+
   };
 
   const uploadJob = async () => {
