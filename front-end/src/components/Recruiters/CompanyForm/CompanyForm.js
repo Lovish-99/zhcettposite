@@ -24,7 +24,6 @@ const Editstdprofile = () => {
   const [location, setLocation] = useState("");
   const [about, setAbout] = useState("");
   const [visionAndmission, setVisionAndmission] = useState("");
-  const companyDetailss = JSON.parse(localStorage.getItem("companyDetails"));
   const authorize = JSON.parse(localStorage.getItem("token"));
   const identity = JSON.parse(localStorage.getItem("recruiter"));
   const navigate = useNavigate();
@@ -33,6 +32,7 @@ const Editstdprofile = () => {
     if (!authorize || !identity) {
       navigate("/");
     } else {
+      const companyDetailss = JSON.parse(localStorage.getItem("companyDetails"));
       const revealIdentity = identity.role;
       if (revealIdentity === "recruiter") {
         if(companyDetailss){
@@ -67,7 +67,9 @@ const Editstdprofile = () => {
         authorization: JSON.parse(localStorage.getItem("token")),
       },
     });
-    navigate("/recruiter/dashboard");
+    localStorage.setItem("companyDetails", "ok");
+    alert("Company Details Submitted ")
+    navigate("/");
   };
 
   return (
@@ -91,7 +93,6 @@ const Editstdprofile = () => {
           </MDBRow>
           <hr />
           <MDBRow style={{ height: "20px" }}></MDBRow>
-          <form>
             <MDBRow>
               <MDBCol>
                 <label>
@@ -245,7 +246,6 @@ const Editstdprofile = () => {
                 </MDBCol>
               </MDBRow>
             </MDBRow>
-          </form>
         </MDBCardBody>
       </MDBCard>
     </MDBContainer>

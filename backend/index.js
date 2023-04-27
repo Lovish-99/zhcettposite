@@ -17,10 +17,15 @@ var bodyParser = require('body-parser');
 const FacultyRoute = require("./routes/importCsvfile");
 const JobApplyRoute = require("./routes/Applyjobs");
 app.use(bodyParser.json({limit: '50mb'}));
+const corsOptions ={
+  origin:'*', 
+  credentials:true, //access-control-allow-credentials:true
+   optionSuccessStatus:200,
+}
 
 // middlewares
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use("/userapi", userRoute);
 app.use("/employapi", employeeRoute);
 app.use("/employInfoapi", employerInfo);
