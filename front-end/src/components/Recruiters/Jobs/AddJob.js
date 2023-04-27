@@ -35,7 +35,6 @@ const AddJob = () => {
   const covertToBase64 = (e) => {
     console.log(e);
     var reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
       console.log(reader.result);
       const arrayBuffer = reader.result;
