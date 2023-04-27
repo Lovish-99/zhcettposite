@@ -11,7 +11,7 @@ import {
 import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import ReactLoading from "react-loading";
-import {API_URL} from '../../../helper';
+import { API_URL } from '../../../helper';
 
 const EditStudentQualify = () => {
   const [qualifyLevel, setqualifyLevel] = useState("");
@@ -24,6 +24,7 @@ const EditStudentQualify = () => {
   const [grade, setGrade] = useState("");
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
   const authorize = JSON.parse(localStorage.getItem("token"));
   const navigate = useNavigate();
   let i = 0;
@@ -70,6 +71,7 @@ const EditStudentQualify = () => {
 
   const update_qualify = async () => {
     const idd = JSON.parse(localStorage.getItem("student"))._id;
+    setLoading2(true);
     await fetch(`${API_URL}/dataapi/update-data/${idd}`, {
       method: "put",
       body: JSON.stringify({
@@ -89,6 +91,8 @@ const EditStudentQualify = () => {
         authorization: JSON.parse(localStorage.getItem("token")),
       },
     });
+    setLoading2(false);
+    alert("updated successfully");
   };
 
   return (
@@ -289,14 +293,29 @@ const EditStudentQualify = () => {
                   </MDBRow>
                   <MDBRow>
                     <MDBCol>
-                      <MDBBtn
-                        type="submit"
-                        onClick={() => {
-                          update_qualify();
-                        }}
-                      >
-                        Update
-                      </MDBBtn>
+                      <>
+                        {loading2 ? (
+                          <MDBContainer
+                            className="mt-4"
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          >
+                            <ReactLoading type="spin" color="#0000FF" height={60} width={30} />
+                          </MDBContainer>
+                        ) : (
+                          <MDBBtn
+                            type="submit"
+                            onClick={() => {
+                              update_qualify();
+                            }}
+                          >
+                            Update
+                          </MDBBtn>
+                        )};
+                      </>
                     </MDBCol>
                     <MDBCol>
                       <Link to="/student/stdqualify">

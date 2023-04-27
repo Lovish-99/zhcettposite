@@ -12,7 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import ReactLoading from "react-loading";
-import {API_URL} from '../../../helper';
+import { API_URL } from '../../../helper';
 
 const Editstdprofile = () => {
   const [passwordType, setPasswordType] = useState("password");
@@ -36,6 +36,7 @@ const Editstdprofile = () => {
   const [lastN, setLast] = useState("");
   const [middleN, setMiddle] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
   const authorize = JSON.parse(localStorage.getItem("token"));
   const navigate = useNavigate();
   useEffect(() => {
@@ -84,6 +85,7 @@ const Editstdprofile = () => {
 
   const update_profile = async () => {
     const idd = JSON.parse(localStorage.getItem("student"))._id;
+    setLoading2(true);
     await fetch(`${API_URL}/dataapi/update-data/${idd}`, {
       method: "put",
       body: JSON.stringify({
@@ -111,6 +113,8 @@ const Editstdprofile = () => {
         authorization: JSON.parse(localStorage.getItem("token")),
       },
     });
+    setLoading2(false);
+    alert("updated successfully");
   };
 
   const togglePassword = () => {
@@ -556,14 +560,29 @@ const Editstdprofile = () => {
                   <MDBRow>
                     <MDBRow>
                       <MDBCol>
-                        <MDBBtn
-                          type="submit"
-                          onClick={() => {
-                            update_profile();
-                          }}
-                        >
-                          Update
-                        </MDBBtn>
+                        <>
+                          {loading2 ? (
+                            <MDBContainer
+                              className="mt-4"
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                              }}
+                            >
+                              <ReactLoading type="spin" color="#0000FF" height={60} width={30} />
+                            </MDBContainer>
+                          ) : (
+                            <MDBBtn
+                              type="submit"
+                              onClick={() => {
+                                update_profile();
+                              }}
+                            >
+                              Update
+                            </MDBBtn>
+                          )};
+                        </>
                       </MDBCol>
                       <MDBCol>
                         <Link to="/student/stdprofile">
@@ -577,7 +596,8 @@ const Editstdprofile = () => {
             </MDBCard>
           </MDBContainer>
         </>
-      )}
+      )
+      }
     </>
   );
 };

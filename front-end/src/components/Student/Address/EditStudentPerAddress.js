@@ -10,7 +10,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { Country, State, City } from "country-state-city";
 import ReactLoading from "react-loading";
-import {API_URL} from '../../../helper';
+import { API_URL } from '../../../helper';
 
 const EditStudentPerAddress = () => {
   const [flatNo, setflatNo] = useState("");
@@ -22,6 +22,7 @@ const EditStudentPerAddress = () => {
   const [country, setcountry] = useState("");
   const [province, setprovince] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
   const authorize = JSON.parse(localStorage.getItem("token"));
   const navigate = useNavigate();
   useEffect(() => {
@@ -59,6 +60,7 @@ const EditStudentPerAddress = () => {
 
   const update_peraddress = async () => {
     const idd = JSON.parse(localStorage.getItem("student"))._id;
+    setLoading2(true);
     await fetch(`${API_URL}/dataapi/update-data/${idd}`, {
       method: "put",
       body: JSON.stringify({
@@ -78,6 +80,8 @@ const EditStudentPerAddress = () => {
         authorization: JSON.parse(localStorage.getItem("token")),
       },
     });
+    setLoading2(false);
+    alert("updated successfully");
   };
 
   const CountryVar = Country.getAllCountries();
@@ -294,14 +298,29 @@ const EditStudentPerAddress = () => {
                     <MDBRow>
                       <MDBRow>
                         <MDBCol>
-                          <MDBBtn
-                            type="submit"
-                            onClick={() => {
-                              update_peraddress();
-                            }}
-                          >
-                            Update
-                          </MDBBtn>
+                          <>
+                            {loading2 ? (
+                              <MDBContainer
+                                className="mt-4"
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <ReactLoading type="spin" color="#0000FF" height={60} width={30} />
+                              </MDBContainer>
+                            ) : (
+                              <MDBBtn
+                                type="submit"
+                                onClick={() => {
+                                  update_peraddress();
+                                }}
+                              >
+                                Update
+                              </MDBBtn>
+                            )};
+                          </>
                         </MDBCol>
                         <MDBCol>
                           <Link to="/student/stdaddress">

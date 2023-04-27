@@ -23,6 +23,7 @@ const MangStudent = () => {
   const [course, setCourse] = useState("");
   const [faculty, setFaculty] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
   useEffect(() => {
     getProfiles();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,7 +50,7 @@ const MangStudent = () => {
   const deleteUser = async (value) => {
     const email = value;
     console.log(email);
-    setLoading(true);
+    setLoading2(true);
     await fetch(`${API_URL}/dataapi/delete-user`, {
       method: "delete",
       headers: {
@@ -63,8 +64,9 @@ const MangStudent = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "ok") {
-          setLoading(false);
+          setLoading2(false);
           alert("user delected succesfully!");
+          navigate("/");
         }
       });
   };
@@ -94,7 +96,7 @@ const MangStudent = () => {
                                 }}
                               />
                             </MDBCol>
-                            <MDBCol md={1} style={{ height: "15px", width: "20px"}}></MDBCol>
+                            <MDBCol md={1} style={{ height: "15px", width: "20px" }}></MDBCol>
                             <MDBCol md={6}>
                               <h6><span style={{ fontSize: "bold" }}>Name: </span>{item.username}</h6>
                               <h6>Branch: {item.stdprofile.department}</h6>
@@ -120,12 +122,27 @@ const MangStudent = () => {
                           </MDBRow>
                         </MDBCol>
                         <MDBCol>
-                          <MDBBtn
-                            type="submit"
-                            onClick={() => deleteUser(item.email)}
-                          >
-                            <i className="fa-solid fa-trash"></i>
-                          </MDBBtn>
+                          <>
+                            {loading2 ? (
+                              <MDBContainer
+                                className="mt-4"
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <ReactLoading type="spin" color="#0000FF" height={70} width={40} />
+                              </MDBContainer>
+                            ) : (
+                              <MDBBtn
+                                type="submit"
+                                onClick={() => deleteUser(item.email)}
+                              >
+                                <i className="fa-solid fa-trash"></i>
+                              </MDBBtn>
+                            )};
+                          </>
                         </MDBCol>
                       </MDBRow>
                     </MDBContainer>
@@ -267,7 +284,7 @@ const MangStudent = () => {
                       ></MDBInput>
                     </MDBCol>
 
-                    
+
                     <MDBCol>
                       <Link
                         to={`${course}/${department}/${faculty}`}

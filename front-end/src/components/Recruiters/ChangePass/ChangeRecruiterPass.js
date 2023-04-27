@@ -11,6 +11,7 @@ const ChangeRecruiterPass = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const [show, setShow] = useState(false);
+ 
   
   const handleResetPassword = async () => {
     try {
@@ -87,8 +88,8 @@ const ChangeRecruiterPass = () => {
                     </Form.Group>
                     <Button
                       variant="primary"
-                      type="submit"
-                      onClick={handleResetPassword}
+                      type="button"
+                      onClick={() => handleResetPassword()}
                     >
                       Send
                     </Button>

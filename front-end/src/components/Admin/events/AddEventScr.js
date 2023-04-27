@@ -64,6 +64,8 @@ const AddEvent = () => {
         authorization: JSON.parse(localStorage.getItem("token")),
       },
     });
+    alert("event added successfully");
+    navigate("/admin/viewEvent");
   };
 
   return (
@@ -180,7 +182,7 @@ const AddEvent = () => {
             <MDBRow style={{ height: "20px" }}></MDBRow>
             <MDBRow>
               <MDBCol>
-                <MDBBtn type="submit" onClick={() => uploadJob()}>
+                <MDBBtn type="button" onClick={() => uploadJob()}>
                   Save
                 </MDBBtn>
               </MDBCol>

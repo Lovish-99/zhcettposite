@@ -54,6 +54,7 @@ const MangAdmin = () => {
         .then((data) => {
           if (data.status === "ok") {
             alert("user delected succesfully!");
+            navigate("/");
           }
         });
     }

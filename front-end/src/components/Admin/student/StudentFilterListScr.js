@@ -75,7 +75,7 @@ const MangStudent = () => {
                   <MDBRow style={{ padding: "20px" }}>
                     <MDBCol md={2}>
                       <img
-                        src={item.picture.picture[0]["dataImage"]}
+                        src={`data:application/image;base64,${item.picture.picture[0]["dataImage"]}`}
                         alt="pic"
                         style={{ borderRadius: "25px solid", height: "200px" }}
                       />

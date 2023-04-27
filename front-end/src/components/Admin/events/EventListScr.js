@@ -11,14 +11,14 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import ReactLoading from "react-loading";
-import {API_URL} from '../../../helper';
+import { API_URL } from '../../../helper';
 
 const ViewEvent = () => {
   const auth = JSON.parse(localStorage.getItem("token"));
   const navigate = useNavigate();
   const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [loading2, setLoading2] = useState(false);
   useEffect(() => {
     getProfiles();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -42,6 +42,7 @@ const ViewEvent = () => {
 
   const deleteUser = async (value) => {
     const title = value;
+    setLoading2(true);
     fetch(`${API_URL}/eventapi/delete-user`, {
       method: "delete",
       headers: {
@@ -55,7 +56,9 @@ const ViewEvent = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "ok") {
+          setLoading2(false);
           alert("event deleted succesfully!");
+          navigate("/");
         }
       });
   };
@@ -83,9 +86,7 @@ const ViewEvent = () => {
                               >
                                 {item.title}
                               </h1>
-                              <h2 style={{ color: "#004c4c" }}>
-                                {item.description}
-                              </h2>
+                              
                               <h4 style={{ color: "#004c4c" }}>
                                 Event Date: {item.date}
                               </h4>
@@ -98,12 +99,27 @@ const ViewEvent = () => {
                         </Link>
                       </MDBCol>
                       <MDBCol>
-                        <MDBBtn
-                          type="submit"
-                          onClick={() => deleteUser(item.title)}
-                        >
-                          <i className="fa-solid fa-trash"></i>
-                        </MDBBtn>
+                        <>
+                          {loading2 ? (
+                            <MDBContainer
+                              className="mt-4"
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                              }}
+                            >
+                              <ReactLoading type="spin" color="#0000FF" height={70} width={40} />
+                            </MDBContainer>
+                          ) : (
+                            <MDBBtn
+                              type="submit"
+                              onClick={() => deleteUser(item.title)}
+                            >
+                              <i className="fa-solid fa-trash"></i>
+                            </MDBBtn>
+                          )};
+                        </>
                       </MDBCol>
                     </MDBRow>
                   </MDBCardBody>

@@ -65,6 +65,8 @@ const AddJob = () => {
         authorization: JSON.parse(localStorage.getItem("token")),
       },
     });
+    alert("job added successfully");
+    navigate("/admin/viewJob");
   };
 
   return (
@@ -84,7 +86,7 @@ const AddJob = () => {
           </MDBRow>
           <hr />
           <MDBRow style={{ height: "20px" }}></MDBRow>
-          <form >
+          
             <MDBRow>
               <MDBCol>
                 <label>Company Name: </label>
@@ -224,7 +226,7 @@ const AddJob = () => {
                 </Link>
               </MDBCol>
             </MDBRow>
-          </form>
+      
         </MDBCardBody>
       </MDBCard>
     </MDBContainer>

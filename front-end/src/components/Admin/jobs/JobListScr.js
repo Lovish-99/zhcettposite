@@ -11,13 +11,14 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import ReactLoading from "react-loading";
-import {API_URL} from '../../../helper';
+import { API_URL } from '../../../helper';
 
 const ViewJobs = () => {
   const auth = JSON.parse(localStorage.getItem("token"));
   const navigate = useNavigate();
   const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
   useEffect(() => {
     getProfiles();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -41,7 +42,7 @@ const ViewJobs = () => {
 
   const deleteUser = async (value) => {
     const companyName = value;
-    setLoading(true);
+    setLoading2(true);
     await fetch(`${API_URL}/jobapi/delete-user`, {
       method: "delete",
       headers: {
@@ -55,8 +56,9 @@ const ViewJobs = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "ok") {
-          setLoading(false);
+          setLoading2(false);
           alert("job deleted succesfully!");
+          navigate("/");
         }
       });
   };
@@ -112,12 +114,27 @@ const ViewJobs = () => {
                         <MDBRow style={{ height: "5px" }} />
                         <MDBRow>
                           <MDBCol>
-                            <MDBBtn
-                              type="submit"
-                              onClick={() => deleteUser(item.companyName)}
-                            >
-                              <i className="fa-solid fa-trash"></i>
-                            </MDBBtn>
+                            <>
+                              {loading2 ? (
+                                <MDBContainer
+                                  className="mt-4"
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                  }}
+                                >
+                                  <ReactLoading type="spin" color="#0000FF" height={70} width={40} />
+                                </MDBContainer>
+                              ) : (
+                                <MDBBtn
+                                  type="submit"
+                                  onClick={() => deleteUser(item.companyName)}
+                                >
+                                  <i className="fa-solid fa-trash"></i>
+                                </MDBBtn>
+                              )};
+                            </>
                           </MDBCol>
                         </MDBRow>
                       </MDBCol>

@@ -88,8 +88,8 @@ const ChangeStudentPass = () => {
                     </Form.Group>
                     <Button
                       variant="primary"
-                      type="submit"
-                      onClick={handleResetPassword}
+                      type="button"
+                      onClick={() => handleResetPassword()}
                     >
                       Send
                     </Button>
