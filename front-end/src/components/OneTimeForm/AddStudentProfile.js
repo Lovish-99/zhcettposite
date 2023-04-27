@@ -249,7 +249,7 @@ const AddStudentProfile = () => {
                   type="text"
                   value={rollNum}
                   onChange={(e) => setrollNum(e.target.value)}
-                  pattern="[A-Z][A-Z]+[0-9]{3}"
+                  pattern="[A-Z]+[0-9]{4}"
                   title="For example: A0231, First letter should be capital"
                   maxLength={5}
                   required

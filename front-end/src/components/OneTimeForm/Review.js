@@ -5,10 +5,12 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import {API_URL} from '../../helper';
+import ReactLoading from "react-loading";
+import { API_URL } from '../../helper';
 
 const Review = () => {
   const [nextButton, setnextbutton] = useState(true);
+  const [loading, setLoading] = useState(false);
   const Student = JSON.parse(localStorage.getItem("student"));
   const StudentProfile = JSON.parse(localStorage.getItem("stdprofile"));
   const PerAddress = JSON.parse(localStorage.getItem("stdperaddress"));
@@ -21,6 +23,7 @@ const Review = () => {
   };
 
   const uploadData = async () => {
+    setLoading(true);
     const studentId = JSON.parse(localStorage.getItem("student"))._id;
     const firstN = JSON.parse(localStorage.getItem("student")).firstName;
     const middleN = JSON.parse(localStorage.getItem("student")).middleName;
@@ -54,9 +57,11 @@ const Review = () => {
         authorization: JSON.parse(localStorage.getItem("token")),
       },
     });
-
+    setLoading(false);
     localStorage.removeItem("onetimeform");
     localStorage.setItem("form", "ok");
+    alert("Your data stored successfully");
+    navigate("/");
   };
 
   return (
@@ -547,11 +552,24 @@ const Review = () => {
                 </MDBBtn>
               </MDBCol>
               <MDBCol>
-                <Link to="/">
-                  <MDBBtn type="submit" onClick={() => uploadData()} disabled={nextButton}>
-                    Submit
-                  </MDBBtn>
-                </Link>
+                <>
+                  {loading ? (
+                    <MDBContainer
+                      className="mt-4"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <ReactLoading type="spin" color="#0000FF" height={60} width={30} />
+                    </MDBContainer>
+                  ) : (
+                    <MDBBtn type="submit" onClick={() => uploadData()} disabled={nextButton}>
+                      Submit
+                    </MDBBtn>
+                  )};
+                </>
               </MDBCol>
             </MDBRow>
           </MDBRow>
