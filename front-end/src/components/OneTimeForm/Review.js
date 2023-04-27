@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   MDBBtn, MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBRadio,
 } from "mdb-react-ui-kit";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import ReactLoading from "react-loading";

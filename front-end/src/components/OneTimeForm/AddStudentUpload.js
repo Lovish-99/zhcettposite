@@ -13,13 +13,15 @@ import { useNavigate } from "react-router-dom";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import base64 from "base64-js";
-import {API_URL} from '../../helper';
+import ReactLoading from "react-loading";
+import { API_URL } from '../../helper';
 
 const AddStudentUpload = () => {
   pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
   var Images = [];
   var uploadImages = [];
   const [nextButton, setnextbutton] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const idd = JSON.parse(localStorage.getItem("student"))._id;
 
@@ -67,8 +69,9 @@ const AddStudentUpload = () => {
   const NextButton = () => {
     navigate("/onetimeform/reviewform");
   };
-  function uploadImage() {
-    fetch(`${API_URL}/docapi/upload-image`, {
+  const uploadImage = async () => {
+    setLoading(true);
+    await fetch(`${API_URL}/docapi/upload-image`, {
       method: "POST",
       crossDomain: true,
       headers: {
@@ -79,9 +82,8 @@ const AddStudentUpload = () => {
         studentId: idd,
         stdupload: Images,
       }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    });
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -500,15 +502,30 @@ const AddStudentUpload = () => {
             <MDBRow style={{ height: "40px" }}></MDBRow>
             <MDBRow>
               <MDBCol>
-                <MDBBtn
-                  type="submit"
-                  onClick={() => {
-                    setDocuments();
-                    uploadImage();
-                  }}
-                >
-                  Save
-                </MDBBtn>
+                <>
+                  {loading ? (
+                    <MDBContainer
+                      className="mt-4"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <ReactLoading type="spin" color="#0000FF" height={60} width={30} />
+                    </MDBContainer>
+                  ) : (
+                    <MDBBtn
+                      type="submit"
+                      onClick={() => {
+                        setDocuments();
+                        uploadImage();
+                      }}
+                    >
+                      Save
+                    </MDBBtn>
+                  )};
+                </>
               </MDBCol>
               <MDBCol>
                 <MDBBtn
