@@ -5,6 +5,7 @@ import {
   MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBCardImage, MDBBtn,
 } from "mdb-react-ui-kit";
 import {API_URL} from '../../../helper';
+import ReactLoading from "react-loading";
 
 const StudentRegister = () => {
   var [enroll, setEnroll] = useState();
@@ -17,6 +18,7 @@ const StudentRegister = () => {
   const [show, setShow] = useState(true);
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   var uploads = [];
   var sett = [];
@@ -54,6 +56,7 @@ const StudentRegister = () => {
     setEnroll(data);
   }
   const collectData = () => {
+    setLoading(true);
     enroll= enroll.value
     console.log(enroll)
     fetch(`${API_URL}/userapi/register`, {
@@ -79,6 +82,7 @@ const StudentRegister = () => {
           localStorage.setItem("token", JSON.stringify(data.data.token));
           localStorage.setItem("onetimeform", "ok");
           alert("Registration Successful");
+          setLoading(false);
           navigate("/onetimeform/addstdprofile");
         } else {
           alert("Something went wrong");
@@ -137,6 +141,14 @@ const StudentRegister = () => {
         <MDBCard className="text-black m-5" style={{ borderRadius: "25px" }}>
           <MDBCardBody>
             <MDBRow>
+            {loading ? (
+                <ReactLoading
+                  type="spin"
+                  color="#0000FF"
+                  height={100}
+                  width={50}
+                />
+              ) : null}
               {/* 1st half part of the register page */}
               <MDBCol
                 md="10"

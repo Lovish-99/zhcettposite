@@ -58,9 +58,6 @@ const EventList = () => {
                           <h1 style={{ color: "#004c4c", fontWeight: "bold" }}>
                             {item.title}
                           </h1>
-                          <h2 style={{ color: "#004c4c" }}>
-                            {item.description}
-                          </h2>
                           <h4 style={{ color: "#004c4c" }}>
                             Event Date: {item.date}
                           </h4>
